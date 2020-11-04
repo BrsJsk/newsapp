@@ -11,7 +11,7 @@ export function Header() {
 			</div>
 
 			<div>
-				<HeaderButton>GB</HeaderButton>
+				<HeaderButton active={true}>GB</HeaderButton>
 				<HeaderButton>US</HeaderButton>
 			</div>
 		</HeaderWrapper>
@@ -22,7 +22,6 @@ export function Header() {
 const HeaderWrapper = styled.div`
 	display: flex;
 	height: 60px;
-	width: 100vw;
 	background: #fbf6f6;
 	justify-content: space-between;
 `
@@ -30,7 +29,6 @@ const HeaderWrapper = styled.div`
 const HeaderButton = styled.button`
 	height: 60px;
     min-width: 120px;
-    background: #cbcbcd;
+    background: ${props => props.active ? "#6161aa" : "#fbf6f6"};
     border: 1px solid #a4a4a9;
-    margin-right: 5px;
 `
