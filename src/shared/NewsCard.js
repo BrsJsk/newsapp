@@ -10,7 +10,7 @@ export function NewsCard(props) {
 			<CardThumbnail
 				thumbnail={props.news.urlToImage}/>
 			<CardDescription title={props.news.description}>{props.news.description}</CardDescription>
-			<Link to="/details">
+			<Link to="/details" onClick={() => props.setArticleDetails(props.news)}>
 				<button>More</button>
 			</Link>
 		</CardWrapper>
