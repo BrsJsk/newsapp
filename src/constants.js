@@ -1,5 +1,5 @@
 export const LoadingStatus = {
-	LOADING: 'loading',
-	ERROR: 'error',
-	SUCCESS: 'success'
-}
+  LOADING: 'loading',
+  ERROR: 'error',
+  SUCCESS: 'success',
+};
