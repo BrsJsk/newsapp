@@ -7,7 +7,7 @@ import {
 import {Header} from "./shared";
 import Categories from "./Categories/Categories";
 import Search from "./Search/Search";
-import TopNews from "./News/TopNews";
+import {TopNews, NewsDetails} from "./News";
 
 function App() {
 	return (
@@ -19,12 +19,19 @@ function App() {
 					<Route path="/search">
 						<Search />
 					</Route>
+
 					<Route path="/categories">
 						<Categories	/>
 					</Route>
+
+					<Route path="/details">
+						<NewsDetails />
+					</Route>
+
 					<Route path="/">
 						<TopNews />
 					</Route>
+
 				</Switch>
 			</div>
 		</Router>

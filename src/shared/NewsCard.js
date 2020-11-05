@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 export function NewsCard(props) {
 	return (
@@ -9,7 +10,9 @@ export function NewsCard(props) {
 			<CardThumbnail
 				thumbnail={props.news.urlToImage}/>
 			<CardDescription title={props.news.description}>{props.news.description}</CardDescription>
-			<button>More</button>
+			<Link to="/details">
+				<button>More</button>
+			</Link>
 		</CardWrapper>
 	);
 }
