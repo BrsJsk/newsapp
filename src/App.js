@@ -1,4 +1,3 @@
-import {Home} from "./Home";
 import React from "react";
 import {
 	BrowserRouter as Router,
@@ -8,6 +7,7 @@ import {
 import {Header} from "./shared";
 import Categories from "./Categories/Categories";
 import Search from "./Search/Search";
+import TopNews from "./News/TopNews";
 
 function App() {
 	return (
@@ -23,7 +23,7 @@ function App() {
 						<Categories	/>
 					</Route>
 					<Route path="/">
-						<Home />
+						<TopNews />
 					</Route>
 				</Switch>
 			</div>

@@ -1,16 +1,14 @@
 import React from 'react';
 import styled from "styled-components";
 
-export function NewsCard() {
+export function NewsCard(props) {
 	return (
 		<CardWrapper>
-			<CardHeading>Title</CardHeading>
+			<CardHeading>{props.news.title}</CardHeading>
 
 			<CardThumbnail
-				thumbnail="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.hF-fQdeI7NAltPBvzistAwHaEN%26pid%3DApi&f=1" />
-			<CardDescription>Vel molestiae et tempore aliquid dolorum consectetur aliquid. Voluptas voluptatem et ratione nesciunt
-				placeat minus ut. Fugit autem accusamus minus. Nesciunt nemo earum ipsum dolorem iste aut. Commodi
-				minima et necessitatibus voluptas cumque debitis.…</CardDescription>
+				thumbnail={props.news.urlToImage}/>
+			<CardDescription title={props.news.description}>{props.news.description}</CardDescription>
 			<button>More</button>
 		</CardWrapper>
 	);
@@ -18,13 +16,17 @@ export function NewsCard() {
 
 const CardWrapper = styled.div`
 	max-width: 350px;
-    background: #f6f6f6;
-    height: 350px;
-    display: block;
-    border: 1px solid #d2d0d0;
-    border-radius: 4px;
-    padding: 4px;
-    margin-bottom: 15px;
+	padding: 20px;
+	background: #fff;
+	box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+	border-radius: 5px;
+	margin-bottom: 30px;
+	transition: all 0.2s linear;
+	&:hover {
+	position: relative;
+		top: -1px;
+		box-shadow: 0px 11px 29px 0px rgba(0,0,0,0.23);
+	}
 `
 const CardThumbnail = styled.div`
 	width: 100%;

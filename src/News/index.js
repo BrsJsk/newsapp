@@ -1,1 +1,1 @@
-export * from './TopNews'
+export TopNews from './TopNews'
