@@ -2,21 +2,28 @@ import React from 'react';
 import styled from 'styled-components';
 import {getSelectedArticleDetails} from "../redux/selectors";
 import {connect} from "react-redux";
+import NoData from "../shared/NoData";
 
 function NewsDetails(props) {
 	const {article} = props;
 
-	return (
-		<Wrapper>
-			<h1>{article.title}</h1>
+	if (!article) {
+		return <NoData/>
+	}
 
-			<Image src={article.urlToImage}/>
+	if (article) {
+		return (
+			<Wrapper>
+				<h1>{article.title}</h1>
 
-			<p>{article.content}</p>
+				<Image src={article.urlToImage}/>
 
-			<button>Go back</button>
-		</Wrapper>
-	);
+				<p>{article.content}</p>
+
+				<button>Go back</button>
+			</Wrapper>
+		);
+	}
 }
 
 const Wrapper = styled.div`
