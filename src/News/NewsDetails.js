@@ -3,9 +3,14 @@ import styled from 'styled-components';
 import {getSelectedArticleDetails} from "../redux/selectors";
 import {connect} from "react-redux";
 import NoData from "../shared/NoData";
+import Button from "../shared/Button";
 
 function NewsDetails(props) {
 	const {article} = props;
+
+	const goBack = () => {
+		window.history.back();
+	};
 
 	if (!article) {
 		return <NoData/>
@@ -20,7 +25,7 @@ function NewsDetails(props) {
 
 				<p>{article.content}</p>
 
-				<button>Go back</button>
+				<Button placeholder="Go back" handleClick={goBack} />
 			</Wrapper>
 		);
 	}
