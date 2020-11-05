@@ -1,13 +1,14 @@
 import React from "react";
 import styled from 'styled-components';
+import {Link} from "react-router-dom";
 
 export function Header() {
 	return (
 		<HeaderWrapper>
 			<div>
-				<HeaderButton>Top News</HeaderButton>
-				<HeaderButton>Categories</HeaderButton>
-				<HeaderButton>Search</HeaderButton>
+				<Link to="/"><HeaderButton>Top News</HeaderButton></Link>
+				<Link to="/categories"><HeaderButton>Categories</HeaderButton></Link>
+				<Link to="/search"><HeaderButton>Search</HeaderButton></Link>
 			</div>
 
 			<div>
