@@ -4,7 +4,7 @@ import {NewsCard} from "../shared";
 import {connect} from "react-redux";
 import {getTopNews, getTopNewsLoadingStatus} from "../redux/selectors";
 import {LoadingStatus} from "../constants";
-import {AddTopNews, SetTopNewsStatus} from "../redux/actions";
+import {AddTopNews, SetSelectedArticleDetails, SetTopNewsStatus} from "../redux/actions";
 import {Code} from 'react-content-loader'
 
 function TopNews(props) {
@@ -23,6 +23,10 @@ function TopNews(props) {
 		}
 	})
 
+	const setArticleDetails = (article) => {
+		props.SetSelectedArticleDetails(article)
+	}
+
 	return (
 		<Wrapper>
 			<MainHeading>Top news from Great Britain:</MainHeading>
@@ -33,7 +37,7 @@ function TopNews(props) {
 			{props.status === LoadingStatus.SUCCESS && props.news.length ? (
 				<TopNewsList>
 					{props.news.map((news, index) => (
-						<NewsCard news={news} key={index}/>
+						<NewsCard news={news} key={index} setArticleDetails={setArticleDetails}/>
 					))}
 				</TopNewsList>
 			) : null}
@@ -64,5 +68,5 @@ const mapStateToProps = state => {
 	return {news, status};
 };
 
-export default connect(mapStateToProps, {AddTopNews, SetTopNewsStatus})(TopNews);
+export default connect(mapStateToProps, {AddTopNews, SetTopNewsStatus, SetSelectedArticleDetails})(TopNews);
 
