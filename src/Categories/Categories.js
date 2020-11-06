@@ -1,7 +1,7 @@
 import React from 'react';
 import { MainHeading } from '../shared/Text';
 import { Wrapper } from '../shared/Wrapper';
-import CategorySlider from './CategorySlider';
+import CategoryList from './CategoryList';
 
 const categories = [
   'business',
@@ -18,7 +18,7 @@ function Categories() {
     <Wrapper>
       <MainHeading>Top 5 news by categories from Great Britain</MainHeading>
       {categories.map((category, index) => (
-        <CategorySlider category={category} key={index} />
+        <CategoryList category={category} key={index} />
       ))}
     </Wrapper>
   );
