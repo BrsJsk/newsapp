@@ -6,6 +6,8 @@ import { getTopNews, getTopNewsLoadingStatus } from '../redux/selectors';
 import { LoadingStatus } from '../constants';
 import { AddTopNews, SetSelectedArticleDetails, SetTopNewsStatus } from '../redux/actions';
 import { Code } from 'react-content-loader';
+import { MainHeading } from '../shared/Text';
+import { Wrapper } from '../shared/Wrapper';
 
 function TopNews(props) {
   useEffect(() => {
@@ -47,15 +49,6 @@ function TopNews(props) {
     </Wrapper>
   );
 }
-
-const MainHeading = styled.h1`
-  font-size: 24px;
-  color: #3f3e3e;
-`;
-
-const Wrapper = styled.div`
-  padding: 14px;
-`;
 
 const TopNewsList = styled.div`
   padding: 14px;

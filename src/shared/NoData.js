@@ -1,8 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NoDataText } from './Text';
 
 function NoData() {
-  return <Wrapper>No data</Wrapper>;
+  return (
+    <Wrapper>
+      <NoDataText>No data</NoDataText>
+    </Wrapper>
+  );
 }
 
 const Wrapper = styled.div`
@@ -11,8 +16,6 @@ const Wrapper = styled.div`
   justify-content: center;
   flex: 1;
   height: calc(100vh - 60px);
-  color: #bfb9b9;
-  font-size: 24px;
 `;
 
 export default NoData;
