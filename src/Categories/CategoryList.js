@@ -3,6 +3,7 @@ import { UnderlinedHeading } from '../shared/Text';
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import CategoryNewsSlider from './CategoryNewsSlider';
 import { getFakeData } from './fakedata';
+import { Link } from 'react-router-dom';
 
 function CategoryList(props) {
   const [isAccordionOn, toggleAccordion] = useState(true);
@@ -50,15 +51,14 @@ function CategoryList(props) {
 
   return (
     <div>
-      <UnderlinedHeading>
-        {category}
-
-        {isAccordionOn ? (
-          <FaArrowDown onClick={handleAccordionToggle} style={{ marginLeft: '20px' }} />
-        ) : (
-          <FaArrowUp onClick={handleAccordionToggle} style={{ marginLeft: '20px' }} />
-        )}
-      </UnderlinedHeading>
+      <Link to={`/categories/${category}`}>
+        <UnderlinedHeading>{category}</UnderlinedHeading>
+      </Link>
+      {isAccordionOn ? (
+        <FaArrowDown onClick={handleAccordionToggle} style={{ marginLeft: '20px' }} />
+      ) : (
+        <FaArrowUp onClick={handleAccordionToggle} style={{ marginLeft: '20px' }} />
+      )}
       {isAccordionOn ? <CategoryNewsSlider loading={isLoading} articles={articles} /> : null}
     </div>
   );

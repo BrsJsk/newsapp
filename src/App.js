@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Header } from './shared';
-import Categories from './Categories/Categories';
+import { Categories, CategoryTopNews } from './Categories';
 import Search from './Search/Search';
 import { NewsDetails, TopNews } from './News';
 
@@ -14,6 +14,10 @@ function App() {
         <Switch>
           <Route path="/search">
             <Search />
+          </Route>
+
+          <Route path="/categories/:id">
+            <CategoryTopNews />
           </Route>
 
           <Route path="/categories">
