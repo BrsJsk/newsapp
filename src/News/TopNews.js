@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { NewsCard } from '../shared';
 import { connect } from 'react-redux';
@@ -6,11 +6,14 @@ import { getTopNews, getTopNewsLoadingStatus } from '../redux/selectors';
 import { LoadingStatus } from '../constants';
 import { AddTopNews, SetSelectedArticleDetails, SetTopNewsStatus } from '../redux/actions';
 import { Code } from 'react-content-loader';
+import { MainHeading } from '../shared/Text';
+import { Wrapper } from '../shared/Wrapper';
+import NoData from '../shared/NoData';
 
-function TopNews(props) {
-  useEffect(() => {
-    if (!props.news.length && props.status !== LoadingStatus.LOADING) {
-      const { SetTopNewsStatus, AddTopNews } = props;
+class TopNews extends React.Component {
+  componentDidMount() {
+    if (!this.props.news.length && this.props.status !== LoadingStatus.LOADING) {
+      const { SetTopNewsStatus, AddTopNews } = this.props;
       SetTopNewsStatus(LoadingStatus.LOADING);
 
       fetch(
@@ -26,36 +29,37 @@ function TopNews(props) {
           SetTopNewsStatus(LoadingStatus.ERROR);
         });
     }
-  });
+  }
 
-  const setArticleDetails = (article) => {
-    props.SetSelectedArticleDetails(article);
-  };
+  render() {
+    const setArticleDetails = (article) => {
+      this.props.SetSelectedArticleDetails(article);
+    };
 
-  return (
-    <Wrapper>
-      <MainHeading>Top news from Great Britain:</MainHeading>
-      {props.status === LoadingStatus.LOADING ? <Code /> : null}
+    if (this.props.status === LoadingStatus.LOADING) {
+      return (
+        <Wrapper>
+          <Code />
+        </Wrapper>
+      );
+    }
 
-      {props.status === LoadingStatus.SUCCESS && props.news.length ? (
+    if (this.props.status === LoadingStatus.ERROR) {
+      return <NoData />;
+    }
+
+    return (
+      <Wrapper>
+        <MainHeading>Top news from Great Britain:</MainHeading>
         <TopNewsList>
-          {props.news.map((news, index) => (
+          {this.props.news.map((news, index) => (
             <NewsCard news={news} key={index} setArticleDetails={setArticleDetails} />
           ))}
         </TopNewsList>
-      ) : null}
-    </Wrapper>
-  );
+      </Wrapper>
+    );
+  }
 }
-
-const MainHeading = styled.h1`
-  font-size: 24px;
-  color: #3f3e3e;
-`;
-
-const Wrapper = styled.div`
-  padding: 14px;
-`;
 
 const TopNewsList = styled.div`
   padding: 14px;

@@ -1,16 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NoDataText } from './Text';
 import Button from './Button';
+import { Link } from 'react-router-dom';
 
 export function NewsCard(props) {
+  const { news } = props;
+
+  if (!news) {
+    return <NoDataText>No data</NoDataText>;
+  }
+
   return (
     <CardWrapper>
-      <CardHeading>{props.news.title}</CardHeading>
+      <CardHeading>{news.title}</CardHeading>
 
-      <CardThumbnail thumbnail={props.news.urlToImage} />
-      <CardDescription title={props.news.description}>{props.news.description}</CardDescription>
-      <Link to="/details" onClick={() => props.setArticleDetails(props.news)}>
+      <CardThumbnail thumbnail={news.urlToImage} />
+      <CardDescription title={news.description}>{news.description}</CardDescription>
+      <Link to="/details" onClick={() => props.setArticleDetails(news)}>
         <Button placeholder="More" />
       </Link>
     </CardWrapper>
