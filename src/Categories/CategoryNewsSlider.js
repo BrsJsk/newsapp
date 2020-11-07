@@ -23,8 +23,8 @@ function CategoryNewsSlider(props) {
 
   return (
     <Wrapper>
-      {articles.map((article) => (
-        <NewsCard news={article} setArticleDetails={setArticleDetails} />
+      {articles.map((article, index) => (
+        <NewsCard news={article} setArticleDetails={setArticleDetails} key={index} />
       ))}
     </Wrapper>
   );
