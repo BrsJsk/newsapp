@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { NewsCard } from '../shared';
+import { NewsCard, SelectedCountryName } from '../shared';
 import { connect } from 'react-redux';
-import { getTopNews, getTopNewsLoadingStatus } from '../redux/selectors';
+import { getSelectedCountry, getTopNews, getTopNewsLoadingStatus } from '../redux/selectors';
 import { LoadingStatus } from '../constants';
 import { AddTopNews, SetSelectedArticleDetails, SetTopNewsStatus } from '../redux/actions';
 import { Code } from 'react-content-loader';
@@ -13,7 +13,7 @@ import { TopNewsList } from '../shared/NewsList';
 
 // TODO: Use real data.
 function TopNews(props) {
-  const { news, status, SetTopNewsStatus, AddTopNews } = props;
+  const { news, status, country, SetTopNewsStatus, AddTopNews } = props;
   const getData = () => {
     // return fetch(
     // 		`https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_API_KEY}`,
@@ -32,14 +32,13 @@ function TopNews(props) {
     getData()
       .then((data) => {
         AddTopNews(data && data.articles.length ? data.articles : []);
-        console.log('LOADED');
         SetTopNewsStatus(LoadingStatus.SUCCESS);
       })
       .catch((err) => {
         console.error(err);
         SetTopNewsStatus(LoadingStatus.ERROR);
       });
-  }, []);
+  }, [country]);
 
   const setArticleDetails = (article) => {
     SetSelectedArticleDetails(article);
@@ -59,7 +58,9 @@ function TopNews(props) {
 
   return (
     <Wrapper>
-      <MainHeading>Top news from Great Britain:</MainHeading>
+      <MainHeading>
+        Top news from <SelectedCountryName country={country} />:
+      </MainHeading>
       <TopNewsList>
         {news.map((news, index) => (
           <NewsCard news={news} key={index} setArticleDetails={setArticleDetails} />
@@ -72,7 +73,8 @@ function TopNews(props) {
 const mapStateToProps = (state) => {
   const news = getTopNews(state);
   const status = getTopNewsLoadingStatus(state);
-  return { news, status };
+  const country = getSelectedCountry(state);
+  return { news, status, country };
 };
 
 export default connect(mapStateToProps, {
