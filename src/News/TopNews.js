@@ -8,28 +8,16 @@ import { Code } from 'react-content-loader';
 import { MainHeading } from '../shared/Text';
 import { Wrapper } from '../shared/Wrapper';
 import NoData from '../shared/NoData';
-import { getFakeData } from '../Categories/fakedata';
 import { TopNewsList } from '../shared/NewsList';
+import { loadTopNews } from '../services/data-service';
 
-// TODO: Use real data.
 function TopNews(props) {
   const { news, status, country, SetTopNewsStatus, AddTopNews } = props;
-  const getData = () => {
-    // return fetch(
-    // 		`https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_API_KEY}`,
-    // ).then((res) => res.json())
-
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getFakeData());
-      }, 3000);
-    });
-  };
 
   useEffect(() => {
     SetTopNewsStatus(LoadingStatus.LOADING);
 
-    getData()
+    loadTopNews(country)
       .then((data) => {
         AddTopNews(data && data.articles.length ? data.articles : []);
         SetTopNewsStatus(LoadingStatus.SUCCESS);
