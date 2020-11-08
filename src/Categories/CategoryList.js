@@ -3,8 +3,8 @@ import { UnderlinedHeading } from '../shared/Text';
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import CategoryNewsSlider from './CategoryNewsSlider';
 import { Link } from 'react-router-dom';
-import { getFakeData } from './fakedata';
 import styled from 'styled-components';
+import { loadTop5NewsForCategory } from '../services/data-service';
 
 // TODO: Add State. Use real data.
 function CategoryList(props) {
@@ -17,20 +17,10 @@ function CategoryList(props) {
     toggleAccordion(!isAccordionOn);
   };
 
-  const getData = () => {
-    // return fetch(
-    // 		`https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=5&apiKey=${process.env.REACT_APP_API_KEY}`,
-    // ).then((res) => res.json())
-
-    return new Promise((resolve) => {
-      resolve(getFakeData());
-    });
-  };
-
   useEffect(() => {
     setIsLoading(true);
 
-    getData()
+    loadTop5NewsForCategory(category, country)
       .then((data) => {
         setIsLoading(false);
         setArticles(data.articles);

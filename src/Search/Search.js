@@ -4,7 +4,6 @@ import { MainHeading } from '../shared/Text';
 import { Wrapper } from '../shared/Wrapper';
 import styled from 'styled-components';
 import { debounceTime } from 'rxjs/operators';
-import { getFakeData } from '../Categories/fakedata';
 import { Code } from 'react-content-loader';
 import NoData from '../shared/NoData';
 import { NewsCard, SelectedCountryName } from '../shared';
@@ -12,10 +11,12 @@ import { connect } from 'react-redux';
 import { SetSelectedArticleDetails } from '../redux/actions';
 import { TopNewsList } from '../shared/NewsList';
 import { getSelectedCountry } from '../redux/selectors';
+import { searchTopNews } from '../services/data-service';
 
 function Search(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState([]);
+  const [searchValue, setSearchValue] = useState(null);
   const { country, SetSelectedArticleDetails } = props;
 
   const searchBarValue$ = new Subject();
@@ -24,25 +25,14 @@ function Search(props) {
     SetSelectedArticleDetails(article);
   };
 
-  const getData = () => {
-    // return fetch(
-    // 		`https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=5&apiKey=${process.env.REACT_APP_API_KEY}`,
-    // ).then((res) => res.json())
-
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(getFakeData());
-      }, 1000);
-    });
-  };
-
   const searchBar = searchBarValue$.pipe(debounceTime(1000)).subscribe((value) => {
-    loadData();
+    setSearchValue(value);
+    loadData(value);
   });
 
-  const loadData = () => {
+  const loadData = (value = searchValue) => {
     setIsLoading(true);
-    getData()
+    searchTopNews(value, country)
       .then((data) => {
         setIsLoading(false);
         setArticles(data.articles);

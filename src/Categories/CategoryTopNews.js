@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Wrapper } from '../shared/Wrapper';
 import { MainHeading } from '../shared/Text';
 import { useParams } from 'react-router-dom';
-import { getFakeData } from './fakedata';
 import { NewsCard, SelectedCountryName } from '../shared';
 import { TopNewsList } from '../shared/NewsList';
 import { getSelectedCountry } from '../redux/selectors';
 import { connect } from 'react-redux';
 import { SetSelectedArticleDetails } from '../redux/actions';
 import { Code } from 'react-content-loader';
+import { loadTopNewsForCategory } from '../services/data-service';
 
-// TODO: Add state. Use real data. A lot of can be shared with TopNews.js
 function CategoryTopNews(props) {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +19,7 @@ function CategoryTopNews(props) {
   useEffect(() => {
     setIsLoading(true);
 
-    getData()
+    loadTopNewsForCategory(id, country)
       .then((data) => {
         setIsLoading(false);
         setArticles(data.articles);
@@ -30,12 +29,6 @@ function CategoryTopNews(props) {
         console.error(err);
       });
   }, [country]);
-
-  const getData = () => {
-    return new Promise((resolve) => {
-      resolve(getFakeData());
-    });
-  };
 
   const setArticleDetails = (article) => {
     SetSelectedArticleDetails(article);
