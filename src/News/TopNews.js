@@ -38,7 +38,7 @@ function TopNews(props) {
         console.error(err);
         SetTopNewsStatus(LoadingStatus.ERROR);
       });
-  }, [country]);
+  }, [country, SetTopNewsStatus, AddTopNews]);
 
   const setArticleDetails = (article) => {
     SetSelectedArticleDetails(article);

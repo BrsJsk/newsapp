@@ -10,9 +10,6 @@ function Header(props) {
   const { country, isDisabled, SetCountry, SetIsDisabledCountry } = props;
 
   const location = useLocation();
-  useEffect(() => {
-    setIsCountrySelectDisabled(location.pathname);
-  }, [location.pathname]);
 
   const setIsCountrySelectDisabled = (path) => {
     if (path === '/details') {
@@ -21,6 +18,10 @@ function Header(props) {
       SetIsDisabledCountry(false);
     }
   };
+
+  useEffect(() => {
+    setIsCountrySelectDisabled(location.pathname);
+  }, [location.pathname, setIsCountrySelectDisabled]);
 
   const setActiveCountry = (country) => {
     SetCountry(country);
