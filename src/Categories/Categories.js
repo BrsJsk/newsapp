@@ -2,6 +2,9 @@ import React from 'react';
 import { MainHeading } from '../shared/Text';
 import { Wrapper } from '../shared/Wrapper';
 import CategoryList from './CategoryList';
+import { getSelectedCountry } from '../redux/selectors';
+import { connect } from 'react-redux';
+import { SelectedCountryName } from '../shared';
 
 const categories = [
   'business',
@@ -13,15 +16,23 @@ const categories = [
   'technology',
 ];
 
-function Categories() {
+function Categories(props) {
+  const { country } = props;
   return (
     <Wrapper>
-      <MainHeading>Top 5 news by categories from Great Britain</MainHeading>
+      <MainHeading>
+        Top 5 news by categories from <SelectedCountryName country={country} />
+      </MainHeading>
       {categories.map((category, index) => (
-        <CategoryList category={category} key={index} />
+        <CategoryList category={category} key={index} country={country} />
       ))}
     </Wrapper>
   );
 }
 
-export default Categories;
+const mapStateToProps = (state) => {
+  const country = getSelectedCountry(state);
+  return { country };
+};
+
+export default connect(mapStateToProps)(Categories);

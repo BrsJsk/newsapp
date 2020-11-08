@@ -11,7 +11,7 @@ function CategoryList(props) {
   const [isAccordionOn, toggleAccordion] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState([]);
-  const { category } = props;
+  const { category, country } = props;
 
   const handleAccordionToggle = () => {
     toggleAccordion(!isAccordionOn);
@@ -28,20 +28,19 @@ function CategoryList(props) {
   };
 
   useEffect(() => {
-    if (articles && !articles.length && !isLoading) {
-      setIsLoading(true);
+    setIsLoading(true);
 
-      getData()
-        .then((data) => {
-          setIsLoading(false);
-          setArticles(data.articles);
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          console.error(err);
-        });
-    }
-  }, [category, articles, isLoading]);
+    getData()
+      .then((data) => {
+        console.log('loaded');
+        setIsLoading(false);
+        setArticles(data.articles);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        console.error(err);
+      });
+  }, [country]);
 
   return (
     <div>
