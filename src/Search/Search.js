@@ -7,15 +7,16 @@ import { debounceTime } from 'rxjs/operators';
 import { getFakeData } from '../Categories/fakedata';
 import { Code } from 'react-content-loader';
 import NoData from '../shared/NoData';
-import { NewsCard } from '../shared';
+import { NewsCard, SelectedCountryName } from '../shared';
 import { connect } from 'react-redux';
 import { SetSelectedArticleDetails } from '../redux/actions';
 import { TopNewsList } from '../shared/NewsList';
+import { getSelectedCountry } from '../redux/selectors';
 
 function Search(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState([]);
-  const { SetSelectedArticleDetails } = props;
+  const { country, SetSelectedArticleDetails } = props;
 
   const searchBarValue$ = new Subject();
 
@@ -35,6 +36,10 @@ function Search(props) {
     });
   };
 
+  const searchBar = searchBarValue$.pipe(debounceTime(1000)).subscribe((value) => {
+    loadData();
+  });
+
   const loadData = () => {
     setIsLoading(true);
     getData()
@@ -49,18 +54,18 @@ function Search(props) {
   };
 
   useEffect(() => {
-    const searchBar = searchBarValue$.pipe(debounceTime(1000)).subscribe((value) => {
-      loadData();
-    });
+    loadData();
 
     return () => {
       searchBar.unsubscribe();
     };
-  });
+  }, [country]);
 
   return (
     <Wrapper>
-      <MainHeading>Search top news from Great Britain:</MainHeading>
+      <MainHeading>
+        Search top news from <SelectedCountryName country={country} />:
+      </MainHeading>
 
       <SearchBarWrapper>
         <SearchBar
@@ -108,6 +113,11 @@ const SearchBar = styled.input`
   }
 `;
 
-export default connect(null, {
+const mapStateToProps = (state) => {
+  const country = getSelectedCountry(state);
+  return { country };
+};
+
+export default connect(mapStateToProps, {
   SetSelectedArticleDetails,
 })(Search);
