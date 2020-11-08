@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NewsCard } from '../shared';
 import { connect } from 'react-redux';
 import { getTopNews, getTopNewsLoadingStatus } from '../redux/selectors';
@@ -12,62 +12,61 @@ import { getFakeData } from '../Categories/fakedata';
 import { TopNewsList } from '../shared/NewsList';
 
 // TODO: Use real data.
-class TopNews extends React.Component {
-  getData = () => {
+function TopNews(props) {
+  const { news, status, SetTopNewsStatus, AddTopNews } = props;
+  const getData = () => {
     // return fetch(
     // 		`https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_API_KEY}`,
     // ).then((res) => res.json())
 
     return new Promise((resolve) => {
-      resolve(getFakeData());
+      setTimeout(() => {
+        resolve(getFakeData());
+      }, 3000);
     });
   };
 
-  componentDidMount() {
-    if (!this.props.news.length && this.props.status !== LoadingStatus.LOADING) {
-      const { SetTopNewsStatus, AddTopNews } = this.props;
-      SetTopNewsStatus(LoadingStatus.LOADING);
+  useEffect(() => {
+    SetTopNewsStatus(LoadingStatus.LOADING);
 
-      this.getData()
-        .then((data) => {
-          AddTopNews(data && data.articles.length ? data.articles : []);
-          SetTopNewsStatus(LoadingStatus.SUCCESS);
-        })
-        .catch((err) => {
-          console.error(err);
-          SetTopNewsStatus(LoadingStatus.ERROR);
-        });
-    }
-  }
+    getData()
+      .then((data) => {
+        AddTopNews(data && data.articles.length ? data.articles : []);
+        console.log('LOADED');
+        SetTopNewsStatus(LoadingStatus.SUCCESS);
+      })
+      .catch((err) => {
+        console.error(err);
+        SetTopNewsStatus(LoadingStatus.ERROR);
+      });
+  }, []);
 
-  render() {
-    const setArticleDetails = (article) => {
-      this.props.SetSelectedArticleDetails(article);
-    };
+  const setArticleDetails = (article) => {
+    SetSelectedArticleDetails(article);
+  };
 
-    if (this.props.status === LoadingStatus.LOADING) {
-      return (
-        <Wrapper>
-          <Code />
-        </Wrapper>
-      );
-    }
-
-    if (this.props.status === LoadingStatus.ERROR) {
-      return <NoData />;
-    }
-
+  if (status === LoadingStatus.LOADING) {
     return (
       <Wrapper>
-        <MainHeading>Top news from Great Britain:</MainHeading>
-        <TopNewsList>
-          {this.props.news.map((news, index) => (
-            <NewsCard news={news} key={index} setArticleDetails={setArticleDetails} />
-          ))}
-        </TopNewsList>
+        <Code />
       </Wrapper>
     );
   }
+
+  if (status === LoadingStatus.ERROR) {
+    return <NoData />;
+  }
+
+  return (
+    <Wrapper>
+      <MainHeading>Top news from Great Britain:</MainHeading>
+      <TopNewsList>
+        {news.map((news, index) => (
+          <NewsCard news={news} key={index} setArticleDetails={setArticleDetails} />
+        ))}
+      </TopNewsList>
+    </Wrapper>
+  );
 }
 
 const mapStateToProps = (state) => {
