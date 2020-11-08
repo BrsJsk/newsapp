@@ -9,17 +9,27 @@ import { Code } from 'react-content-loader';
 import { MainHeading } from '../shared/Text';
 import { Wrapper } from '../shared/Wrapper';
 import NoData from '../shared/NoData';
+import { getFakeData } from '../Categories/fakedata';
+import { TopNewsList } from '../shared/NewsList';
 
+// TODO: Use real data.
 class TopNews extends React.Component {
+  getData = () => {
+    // return fetch(
+    // 		`https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_API_KEY}`,
+    // ).then((res) => res.json())
+
+    return new Promise((resolve) => {
+      resolve(getFakeData());
+    });
+  };
+
   componentDidMount() {
     if (!this.props.news.length && this.props.status !== LoadingStatus.LOADING) {
       const { SetTopNewsStatus, AddTopNews } = this.props;
       SetTopNewsStatus(LoadingStatus.LOADING);
 
-      fetch(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_API_KEY}`,
-      )
-        .then((res) => res.json())
+      this.getData()
         .then((data) => {
           AddTopNews(data && data.articles.length ? data.articles : []);
           SetTopNewsStatus(LoadingStatus.SUCCESS);
@@ -60,13 +70,6 @@ class TopNews extends React.Component {
     );
   }
 }
-
-const TopNewsList = styled.div`
-  padding: 14px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
 
 const mapStateToProps = (state) => {
   const news = getTopNews(state);
