@@ -32,7 +32,6 @@ function CategoryList(props) {
 
     getData()
       .then((data) => {
-        console.log('loaded');
         setIsLoading(false);
         setArticles(data.articles);
       })
