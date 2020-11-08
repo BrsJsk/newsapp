@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getIsCountryDisabled, getSelectedCountry } from '../redux/selectors';
 import { connect } from 'react-redux';
 import { SetCountry, SetIsDisabledCountry } from '../redux/actions';
 import { Countries } from '../constants';
 
 function Header(props) {
-  const { country, isDisabled, SetCountry } = props;
+  const { country, isDisabled, SetCountry, SetIsDisabledCountry } = props;
+
+  const location = useLocation();
+  useEffect(() => {
+    setIsCountrySelectDisabled(location.pathname);
+  }, [location.pathname]);
+
+  const setIsCountrySelectDisabled = (path) => {
+    if (path === '/details') {
+      SetIsDisabledCountry(true);
+    } else {
+      SetIsDisabledCountry(false);
+    }
+  };
 
   const setActiveCountry = (country) => {
     SetCountry(country);
