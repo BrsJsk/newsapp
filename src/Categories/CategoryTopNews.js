@@ -3,7 +3,6 @@ import { Wrapper } from '../shared/Wrapper';
 import { MainHeading } from '../shared/Text';
 import { useParams } from 'react-router-dom';
 import { getFakeData } from './fakedata';
-import styled from 'styled-components';
 import { NewsCard } from '../shared';
 import { TopNewsList } from '../shared/NewsList';
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { NewsCard } from '../shared';
 import { connect } from 'react-redux';
 import { getTopNews, getTopNewsLoadingStatus } from '../redux/selectors';

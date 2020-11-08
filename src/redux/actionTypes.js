@@ -1,4 +1,8 @@
-//TOP NEWS
+// Top news
 export const ADD_TOP_NEWS = 'ADD_TODO';
 export const SET_TOP_NEWS_STATUS = 'TOGGLE_TODO';
 export const SET_SELECTED_ARTICLE_DETAILS = 'SET_SELECTED_ARTICLE_DETAILS';
+
+// Country
+export const SET_COUNTRY = 'SET_COUNTRY';
+export const SET_IS_DISABLED_COUNTRY = 'SET_IS_DISABLED_COUNTRY';
