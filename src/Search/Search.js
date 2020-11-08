@@ -10,6 +10,7 @@ import NoData from '../shared/NoData';
 import { NewsCard } from '../shared';
 import { connect } from 'react-redux';
 import { SetSelectedArticleDetails } from '../redux/actions';
+import { TopNewsList } from '../shared/NewsList';
 
 function Search(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -90,13 +91,6 @@ const SearchBarWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const TopNewsList = styled.div`
-  padding: 14px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 `;
 
 const SearchBar = styled.input`

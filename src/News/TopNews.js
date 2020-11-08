@@ -10,6 +10,7 @@ import { MainHeading } from '../shared/Text';
 import { Wrapper } from '../shared/Wrapper';
 import NoData from '../shared/NoData';
 import { getFakeData } from '../Categories/fakedata';
+import { TopNewsList } from '../shared/NewsList';
 
 // TODO: Use real data.
 class TopNews extends React.Component {
@@ -69,13 +70,6 @@ class TopNews extends React.Component {
     );
   }
 }
-
-const TopNewsList = styled.div`
-  padding: 14px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
 
 const mapStateToProps = (state) => {
   const news = getTopNews(state);

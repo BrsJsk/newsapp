@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { getFakeData } from './fakedata';
 import styled from 'styled-components';
 import { NewsCard } from '../shared';
+import { TopNewsList } from '../shared/NewsList';
 
 // TODO: Add state. Use real data. A lot of can be shared with TopNews.js
 function CategoryTopNews() {
@@ -51,12 +52,5 @@ function CategoryTopNews() {
     </Wrapper>
   );
 }
-
-const TopNewsList = styled.div`
-  padding: 14px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
 
 export default CategoryTopNews;
