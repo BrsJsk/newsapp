@@ -11,17 +11,13 @@ function Header(props) {
 
   const location = useLocation();
 
-  const setIsCountrySelectDisabled = (path) => {
-    if (path === '/details') {
+  useEffect(() => {
+    if (location.pathname === '/details') {
       SetIsDisabledCountry(true);
     } else {
       SetIsDisabledCountry(false);
     }
-  };
-
-  useEffect(() => {
-    setIsCountrySelectDisabled(location.pathname);
-  }, [location.pathname, setIsCountrySelectDisabled]);
+  }, [location.pathname, SetIsDisabledCountry]);
 
   const setActiveCountry = (country) => {
     SetCountry(country);
