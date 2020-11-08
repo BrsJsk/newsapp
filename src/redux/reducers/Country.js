@@ -2,7 +2,7 @@ import { SET_COUNTRY, SET_IS_DISABLED_COUNTRY } from '../actionTypes';
 import { Countries } from '../../constants';
 
 const initialState = {
-  country: Countries.GREAT_BRITAN,
+  country: Countries.GREAT_BRITAIN,
   isDisabled: false,
 };
 

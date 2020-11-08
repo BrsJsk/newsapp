@@ -5,6 +5,6 @@ export const LoadingStatus = {
 };
 
 export const Countries = {
-  GREAT_BRITAN: 'gb',
+  GREAT_BRITAIN: 'gb',
   USA: 'us',
 };

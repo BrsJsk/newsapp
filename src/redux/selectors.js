@@ -13,7 +13,7 @@ export const getSelectedArticleDetails = (store) => getTopNewsState(store).selec
 export const getCountryState = (store) => store.country;
 
 export const getSelectedCountry = (store) =>
-  getCountryState(store) ? getCountryState(store).country : Countries.GREAT_BRITAN;
+  getCountryState(store) ? getCountryState(store).country : Countries.GREAT_BRITAIN;
 
-export const getIsDisabled = (store) =>
+export const getIsCountryDisabled = (store) =>
   getCountryState(store) ? getCountryState(store).isDisabled : true;
