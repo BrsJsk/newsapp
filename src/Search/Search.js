@@ -8,13 +8,18 @@ import { getFakeData } from '../Categories/fakedata';
 import { Code } from 'react-content-loader';
 import NoData from '../shared/NoData';
 import { NewsCard } from '../shared';
+import { connect } from 'react-redux';
+import { SetSelectedArticleDetails } from '../redux/actions';
 
-function Search() {
-  const searchBarValue$ = new Subject();
+function Search(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState([]);
-  const setArticleDetails = () => {
-    //
+  const { SetSelectedArticleDetails } = props;
+
+  const searchBarValue$ = new Subject();
+
+  const setArticleDetails = (article) => {
+    SetSelectedArticleDetails(article);
   };
 
   const getData = () => {
@@ -31,11 +36,8 @@ function Search() {
 
   const loadData = () => {
     setIsLoading(true);
-    console.log('HERE');
     getData()
       .then((data) => {
-        console.log('hey');
-        console.log(isLoading);
         setIsLoading(false);
         setArticles(data.articles);
       })
@@ -112,4 +114,6 @@ const SearchBar = styled.input`
   }
 `;
 
-export default Search;
+export default connect(null, {
+  SetSelectedArticleDetails,
+})(Search);
