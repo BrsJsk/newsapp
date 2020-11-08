@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Header } from './shared';
 import { Categories, CategoryTopNews } from './Categories';
 import Search from './Search/Search';
 import { NewsDetails, TopNews } from './News';
+import { Header } from './shared';
 
 function App() {
   return (

@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { getIsCountryDisabled, getSelectedCountry } from '../redux/selectors';
+import { connect } from 'react-redux';
+import { SetCountry, SetIsDisabledCountry } from '../redux/actions';
+import { Countries } from '../constants';
 
-export function Header() {
+function Header(props) {
+  const { country, isDisabled, SetCountry, SetIsDisabledCountry } = props;
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/details') {
+      SetIsDisabledCountry(true);
+    } else {
+      SetIsDisabledCountry(false);
+    }
+  }, [location.pathname, SetIsDisabledCountry]);
+
+  const setActiveCountry = (country) => {
+    SetCountry(country);
+  };
+
   return (
     <HeaderWrapper>
       <div>
@@ -18,8 +38,20 @@ export function Header() {
       </div>
 
       <div>
-        <HeaderButton active={true}>GB</HeaderButton>
-        <HeaderButton>US</HeaderButton>
+        <HeaderButton
+          onClick={() => setActiveCountry(Countries.GREAT_BRITAIN)}
+          disabled={isDisabled}
+          active={country === Countries.GREAT_BRITAIN}
+        >
+          GB
+        </HeaderButton>
+        <HeaderButton
+          onClick={() => setActiveCountry(Countries.USA)}
+          disabled={isDisabled}
+          active={country === Countries.USA}
+        >
+          US
+        </HeaderButton>
       </div>
     </HeaderWrapper>
   );
@@ -36,5 +68,18 @@ const HeaderButton = styled.button`
   height: 60px;
   min-width: 120px;
   background: ${(props) => (props.active ? '#6161aa' : '#fbf6f6')};
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   border: 1px solid #a4a4a9;
 `;
+
+const mapStateToProps = (state) => {
+  const country = getSelectedCountry(state);
+  const isDisabled = getIsCountryDisabled(state);
+  return { country, isDisabled };
+};
+
+export default connect(mapStateToProps, {
+  SetCountry,
+  SetIsDisabledCountry,
+})(Header);
