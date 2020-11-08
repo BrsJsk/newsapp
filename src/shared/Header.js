@@ -7,7 +7,12 @@ import { SetCountry, SetIsDisabledCountry } from '../redux/actions';
 import { Countries } from '../constants';
 
 function Header(props) {
-  const { country, isDisabled } = props;
+  const { country, isDisabled, SetCountry } = props;
+
+  const setActiveCountry = (country) => {
+    SetCountry(country);
+  };
+
   return (
     <HeaderWrapper>
       <div>
@@ -23,10 +28,18 @@ function Header(props) {
       </div>
 
       <div>
-        <HeaderButton disabled={isDisabled} active={country === Countries.GREAT_BRITAIN}>
+        <HeaderButton
+          onClick={() => setActiveCountry(Countries.GREAT_BRITAIN)}
+          disabled={isDisabled}
+          active={country === Countries.GREAT_BRITAIN}
+        >
           GB
         </HeaderButton>
-        <HeaderButton disabled={isDisabled} active={country === Countries.USA}>
+        <HeaderButton
+          onClick={() => setActiveCountry(Countries.USA)}
+          disabled={isDisabled}
+          active={country === Countries.USA}
+        >
           US
         </HeaderButton>
       </div>
