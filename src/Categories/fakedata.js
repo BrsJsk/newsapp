@@ -9,7 +9,7 @@ export const getFakeData = () => {
           name: 'Seeking Alpha',
         },
         author: null,
-        title: 'CVS Health EPS beats by $0.32, beats on revenue - Seeking Alpha',
+        title: 'Title #1',
         description: 'test',
         url: 'https://seekingalpha.com/news/3633015-cvs-health-eps-beats-0_32-beats-on-revenue',
         urlToImage:
@@ -23,7 +23,7 @@ export const getFakeData = () => {
           name: 'Seeking Alpha',
         },
         author: null,
-        title: 'CVS Health EPS beats by $0.32, beats on revenue - Seeking Alpha',
+        title: 'Title #2',
         description: 'test',
         url: 'https://seekingalpha.com/news/3633015-cvs-health-eps-beats-0_32-beats-on-revenue',
         urlToImage:
@@ -37,7 +37,7 @@ export const getFakeData = () => {
           name: 'Seeking Alpha',
         },
         author: null,
-        title: 'CVS Health EPS beats by $0.32, beats on revenue - Seeking Alpha',
+        title: 'Title #3',
         description: 'test',
         url: 'https://seekingalpha.com/news/3633015-cvs-health-eps-beats-0_32-beats-on-revenue',
         urlToImage:
@@ -51,7 +51,7 @@ export const getFakeData = () => {
           name: 'Seeking Alpha',
         },
         author: null,
-        title: 'CVS Health EPS beats by $0.32, beats on revenue - Seeking Alpha',
+        title: 'Title #4',
         description: 'test',
         url: 'https://seekingalpha.com/news/3633015-cvs-health-eps-beats-0_32-beats-on-revenue',
         urlToImage:
@@ -65,7 +65,7 @@ export const getFakeData = () => {
           name: 'Seeking Alpha',
         },
         author: null,
-        title: 'CVS Health EPS beats by $0.32, beats on revenue - Seeking Alpha',
+        title: 'Title #5',
         description: 'test',
         url: 'https://seekingalpha.com/news/3633015-cvs-health-eps-beats-0_32-beats-on-revenue',
         urlToImage:

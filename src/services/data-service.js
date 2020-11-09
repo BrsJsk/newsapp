@@ -1,12 +1,10 @@
 import { Countries } from '../constants';
 import { getFakeData } from '../Categories/fakedata';
 
-const isProd = false;
-
 export const loadTopNews = (country = Countries.GREAT_BRITAIN) => {
-  const { REACT_APP_API_KEY, REACT_APP_API_URL } = process.env;
+  const { REACT_APP_API_KEY, REACT_APP_API_URL, REACT_APP_FAKE_DATA } = process.env;
 
-  if (!isProd) {
+  if (REACT_APP_FAKE_DATA) {
     return Promise.resolve(getFakeData());
   }
 
@@ -16,9 +14,9 @@ export const loadTopNews = (country = Countries.GREAT_BRITAIN) => {
 };
 
 export const loadTopNewsForCategory = (category, country = Countries.GREAT_BRITAIN) => {
-  const { REACT_APP_API_KEY, REACT_APP_API_URL } = process.env;
+  const { REACT_APP_API_KEY, REACT_APP_API_URL, REACT_APP_FAKE_DATA } = process.env;
 
-  if (!isProd) {
+  if (REACT_APP_FAKE_DATA) {
     return Promise.resolve(getFakeData());
   }
 
@@ -28,9 +26,9 @@ export const loadTopNewsForCategory = (category, country = Countries.GREAT_BRITA
 };
 
 export const loadTop5NewsForCategory = (category, country = Countries.GREAT_BRITAIN) => {
-  const { REACT_APP_API_KEY, REACT_APP_API_URL } = process.env;
+  const { REACT_APP_API_KEY, REACT_APP_API_URL, REACT_APP_FAKE_DATA } = process.env;
 
-  if (!isProd) {
+  if (REACT_APP_FAKE_DATA) {
     return Promise.resolve(getFakeData());
   }
 
@@ -40,9 +38,9 @@ export const loadTop5NewsForCategory = (category, country = Countries.GREAT_BRIT
 };
 
 export const searchTopNews = (searchValue, country = Countries.GREAT_BRITAIN) => {
-  const { REACT_APP_API_KEY, REACT_APP_API_URL } = process.env;
+  const { REACT_APP_API_KEY, REACT_APP_API_URL, REACT_APP_FAKE_DATA } = process.env;
 
-  if (!isProd) {
+  if (REACT_APP_FAKE_DATA) {
     return Promise.resolve(getFakeData());
   }
 
