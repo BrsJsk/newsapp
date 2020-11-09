@@ -16,4 +16,5 @@ export const UnderlinedHeading = styled.h1`
 export const NoDataText = styled.p`
   color: #bfb9b9;
   font-size: 24px;
+  font-weight: 500;
 `;
