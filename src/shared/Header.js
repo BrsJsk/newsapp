@@ -27,17 +27,17 @@ function Header(props) {
   return (
     <HeaderWrapper>
       <ButtonRow>
-        <HeaderButtonTW to="/" active={location.pathname === '/'}>
+        <HeaderButtonLink to="/" active={location.pathname === '/'}>
           Top News
-        </HeaderButtonTW>
+        </HeaderButtonLink>
 
-        <HeaderButtonTW to="/categories" active={location.pathname === '/categories'}>
+        <HeaderButtonLink to="/categories" active={location.pathname === '/categories'}>
           Categories
-        </HeaderButtonTW>
+        </HeaderButtonLink>
 
-        <HeaderButtonTW to="/search" active={location.pathname === '/search'}>
+        <HeaderButtonLink to="/search" active={location.pathname === '/search'}>
           Search
-        </HeaderButtonTW>
+        </HeaderButtonLink>
       </ButtonRow>
 
       <ButtonRow>
@@ -87,7 +87,7 @@ const ButtonRow = styled.div`
   }
 `;
 
-const HeaderButtonTW = styled(Link)`
+const HeaderButtonLink = styled(Link)`
   background: ${(props) => (props.active ? '#6161aa' : '#fbf6f6')};
   color: ${(props) => (props.active ? '#f3f0f0' : '#1d1c1c')};
   display: flex;
@@ -101,14 +101,9 @@ const HeaderButtonTW = styled(Link)`
   height: 60px;
 `;
 
-const HeaderButton = styled.button`
-  height: 60px;
-  min-width: 120px;
-  background: ${(props) => (props.active ? '#6161aa' : '#fbf6f6')};
-  color: ${(props) => (props.active ? '#f3f0f0' : '#1d1c1c')};
+const HeaderButton = styled(HeaderButtonLink)`
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
-  border: 1px solid #a4a4a9;
 `;
 
 const mapStateToProps = (state) => {
