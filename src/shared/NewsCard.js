@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { NoDataText } from './Text';
 import Button from './Button';
 import { Link } from 'react-router-dom';
+import { device } from '../styles/breakpoints';
 
 export function NewsCard(props) {
   const { news } = props;
@@ -25,17 +26,26 @@ export function NewsCard(props) {
 }
 
 const CardWrapper = styled.div`
-  max-width: 350px;
+  margin: 5px;
+  width: 100%;
   padding: 20px;
   background: #fff;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  margin-bottom: 30px;
   transition: all 0.2s linear;
   &:hover {
     position: relative;
     top: -1px;
     box-shadow: 0 11px 29px 0 rgba(0, 0, 0, 0.23);
+  }
+  @media ${device.mobileS} {
+    max-width: 100%;
+  }
+  @media ${device.tablet} {
+    max-width: 40%;
+  }
+  @media ${device.laptop} {
+    max-width: 20%;
   }
 `;
 const CardThumbnail = styled.div`
