@@ -38,6 +38,7 @@ const Wrapper = styled.div`
 `;
 const Image = styled.img`
   width: 100%;
+  max-width: 400px;
   height: auto;
 `;
 
