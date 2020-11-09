@@ -12,7 +12,7 @@ import { TopNewsList } from '../shared/NewsList';
 import { loadTopNews } from '../services/data-service';
 
 function TopNews(props) {
-  const { news, status, country, SetTopNewsStatus, AddTopNews } = props;
+  const { news, status, country, SetTopNewsStatus, AddTopNews, SetSelectedArticleDetails } = props;
 
   useEffect(() => {
     SetTopNewsStatus(LoadingStatus.LOADING);
@@ -26,9 +26,10 @@ function TopNews(props) {
         console.error(err);
         SetTopNewsStatus(LoadingStatus.ERROR);
       });
-  }, [country, SetTopNewsStatus, AddTopNews]);
+  }, [country]);
 
   const setArticleDetails = (article) => {
+    console.log(article);
     SetSelectedArticleDetails(article);
   };
 
