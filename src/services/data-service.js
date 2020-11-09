@@ -1,11 +1,25 @@
 import { Countries } from '../constants';
 import { getFakeData } from '../Categories/fakedata';
 
-export const loadTopNews = (country = Countries.GREAT_BRITAIN) => {
-  const { REACT_APP_API_KEY, REACT_APP_API_URL, REACT_APP_FAKE_DATA } = process.env;
+const isUsingFakeData = () => {
+  const { REACT_APP_FAKE_DATA } = process.env;
 
-  if (REACT_APP_FAKE_DATA) {
-    return Promise.resolve(getFakeData());
+  return REACT_APP_FAKE_DATA === 'true';
+};
+
+const fetchFakeData = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(getFakeData());
+    }, 2000);
+  });
+};
+
+export const loadTopNews = (country = Countries.GREAT_BRITAIN) => {
+  const { REACT_APP_API_KEY, REACT_APP_API_URL } = process.env;
+
+  if (isUsingFakeData()) {
+    return fetchFakeData();
   }
 
   return fetch(
@@ -14,10 +28,10 @@ export const loadTopNews = (country = Countries.GREAT_BRITAIN) => {
 };
 
 export const loadTopNewsForCategory = (category, country = Countries.GREAT_BRITAIN) => {
-  const { REACT_APP_API_KEY, REACT_APP_API_URL, REACT_APP_FAKE_DATA } = process.env;
+  const { REACT_APP_API_KEY, REACT_APP_API_URL } = process.env;
 
-  if (REACT_APP_FAKE_DATA) {
-    return Promise.resolve(getFakeData());
+  if (isUsingFakeData()) {
+    return fetchFakeData();
   }
 
   return fetch(
@@ -26,10 +40,10 @@ export const loadTopNewsForCategory = (category, country = Countries.GREAT_BRITA
 };
 
 export const loadTop5NewsForCategory = (category, country = Countries.GREAT_BRITAIN) => {
-  const { REACT_APP_API_KEY, REACT_APP_API_URL, REACT_APP_FAKE_DATA } = process.env;
+  const { REACT_APP_API_KEY, REACT_APP_API_URL } = process.env;
 
-  if (REACT_APP_FAKE_DATA) {
-    return Promise.resolve(getFakeData());
+  if (isUsingFakeData()) {
+    return fetchFakeData();
   }
 
   return fetch(
@@ -38,10 +52,10 @@ export const loadTop5NewsForCategory = (category, country = Countries.GREAT_BRIT
 };
 
 export const searchTopNews = (searchValue, country = Countries.GREAT_BRITAIN) => {
-  const { REACT_APP_API_KEY, REACT_APP_API_URL, REACT_APP_FAKE_DATA } = process.env;
+  const { REACT_APP_API_KEY, REACT_APP_API_URL } = process.env;
 
-  if (REACT_APP_FAKE_DATA) {
-    return Promise.resolve(getFakeData());
+  if (isUsingFakeData()) {
+    return fetchFakeData();
   }
 
   return fetch(
