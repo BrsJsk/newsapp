@@ -6,9 +6,26 @@ import { connect } from 'react-redux';
 import { SetSelectedArticleDetails } from '../redux/actions';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { Transition } from 'react-transition-group';
+
+const duration = 150;
+
+const defaultStyle = {
+  transition: `opacity ${duration}ms ease-in-out`,
+  opacity: 0,
+};
+
+const transitionStyles = {
+  entering: { opacity: 0.3 },
+  entered: { opacity: 1 },
+  exiting: { opacity: 0.3 },
+  exited: { opacity: 1 },
+};
 
 function CategoryNewsSlider(props) {
   const [articleInSlider, setArticleInSlider] = useState();
+  const [animate, setAnimate] = useState(false);
+
   const [articleIndex, setArticleIndex] = useState(0);
   const { loading, articles, SetSelectedArticleDetails } = props;
 
@@ -24,18 +41,16 @@ function CategoryNewsSlider(props) {
     SetSelectedArticleDetails(article);
   };
 
-  const nextArticle = () => {
-    const nextIndex = articleIndex + 1;
+  const nextArticle = (action) => {
+    setAnimate(true);
+    const nextIndex = action === '+' ? articleIndex + 1 : articleIndex - 1;
     setArticleIndex(nextIndex);
     const nextArticle = articles.find((_, index) => index === nextIndex);
     setArticleInSlider(nextArticle);
-  };
 
-  const previousArticle = () => {
-    const previousIndex = articleIndex - 1;
-    setArticleIndex(previousIndex);
-    const nextArticle = articles.find((_, index) => index === previousIndex);
-    setArticleInSlider(nextArticle);
+    setTimeout(() => {
+      setAnimate(false);
+    }, duration);
   };
 
   const isPreviousArrowEnabled = () => {
@@ -56,28 +71,38 @@ function CategoryNewsSlider(props) {
 
   return (
     <Wrapper>
-      {articleInSlider ? (
-        <SliderWrapper background={articleInSlider.urlToImage}>
-          <Link onClick={() => setArticleDetails(articleInSlider)} to="/details">
-            <SliderHeading>{articleInSlider.title}</SliderHeading>
-          </Link>
-
-          <SliderArrowsWrapper>
-            <SliderIcon
-              onClick={() => (isPreviousArrowEnabled() ? previousArticle() : null)}
-              disabled={!isPreviousArrowEnabled()}
+      {!!articleInSlider ? (
+        <Transition in={animate} timeout={duration}>
+          {(state) => (
+            <SliderWrapper
+              style={{
+                ...defaultStyle,
+                ...transitionStyles[state],
+              }}
+              background={articleInSlider.urlToImage}
             >
-              <FaAngleLeft />
-            </SliderIcon>
+              <Link onClick={() => setArticleDetails(articleInSlider)} to="/details">
+                <SliderHeading>{articleInSlider.title}</SliderHeading>
+              </Link>
 
-            <SliderIcon
-              onClick={() => (isNextArrowEnabled() ? nextArticle() : null)}
-              disabled={!isNextArrowEnabled()}
-            >
-              <FaAngleRight />
-            </SliderIcon>
-          </SliderArrowsWrapper>
-        </SliderWrapper>
+              <SliderArrowsWrapper>
+                <SliderIcon
+                  onClick={() => (isPreviousArrowEnabled() ? nextArticle('-') : null)}
+                  disabled={!isPreviousArrowEnabled()}
+                >
+                  <FaAngleLeft />
+                </SliderIcon>
+
+                <SliderIcon
+                  onClick={() => (isNextArrowEnabled() ? nextArticle('+') : null)}
+                  disabled={!isNextArrowEnabled()}
+                >
+                  <FaAngleRight />
+                </SliderIcon>
+              </SliderArrowsWrapper>
+            </SliderWrapper>
+          )}
+        </Transition>
       ) : null}
 
       {/*{articles.map((article, index) => (*/}
