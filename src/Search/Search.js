@@ -13,11 +13,10 @@ import { TopNewsList } from '../shared/NewsList';
 import { getSelectedCountry } from '../redux/selectors';
 import { searchTopNews } from '../services/data-service';
 
-function Search(props) {
+function Search({ country, SetSelectedArticleDetails }) {
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState([]);
   const [searchValue, setSearchValue] = useState(null);
-  const { country, SetSelectedArticleDetails } = props;
 
   const searchBarValue$ = new Subject();
 
@@ -65,17 +64,17 @@ function Search(props) {
         />
       </SearchBarWrapper>
 
-      {isLoading ? <Code /> : null}
+      {isLoading && <Code />}
 
-      {!isLoading && !articles.length ? <NoData /> : null}
+      {!isLoading && !articles?.length && <NoData />}
 
-      {!isLoading && articles.length ? (
+      {!isLoading && articles?.length && (
         <TopNewsList>
           {articles.map((news, index) => (
             <NewsCard news={news} key={index} setArticleDetails={setArticleDetails} />
           ))}
         </TopNewsList>
-      ) : null}
+      )}
     </Wrapper>
   );
 }

@@ -22,12 +22,11 @@ const transitionStyles = {
   exited: { opacity: 1 },
 };
 
-function CategoryNewsSlider(props) {
+function CategoryNewsSlider({ loading, articles, SetSelectedArticleDetails }) {
   const [articleInSlider, setArticleInSlider] = useState();
   const [animate, setAnimate] = useState(false);
 
   const [articleIndex, setArticleIndex] = useState(0);
-  const { loading, articles, SetSelectedArticleDetails } = props;
 
   useEffect(() => {
     if (articles && articles.length && !articleInSlider) {
@@ -66,7 +65,7 @@ function CategoryNewsSlider(props) {
   }
 
   if (!articles?.length && !loading) {
-    return <Wrapper>{loading ? <NoData /> : null}</Wrapper>;
+    return <Wrapper>{loading && <NoData />}</Wrapper>;
   }
 
   return (
@@ -104,10 +103,6 @@ function CategoryNewsSlider(props) {
           )}
         </Transition>
       ) : null}
-
-      {/*{articles.map((article, index) => (*/}
-      {/*  <NewsCard news={article} setArticleDetails={setArticleDetails} key={index} />*/}
-      {/*))}*/}
     </Wrapper>
   );
 }

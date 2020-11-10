@@ -6,12 +6,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { loadTop5NewsForCategory } from '../services/data-service';
 
-// TODO: Add State. Use real data.
-function CategoryList(props) {
+function CategoryList({ category, country }) {
   const [isAccordionOn, toggleAccordion] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState([]);
-  const { category, country } = props;
 
   const handleAccordionToggle = () => {
     toggleAccordion(!isAccordionOn);

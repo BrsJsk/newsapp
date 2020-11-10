@@ -11,9 +11,14 @@ import NoData from '../shared/NoData';
 import { TopNewsList } from '../shared/NewsList';
 import { loadTopNews } from '../services/data-service';
 
-function TopNews(props) {
-  const { news, status, country, SetTopNewsStatus, AddTopNews, SetSelectedArticleDetails } = props;
-
+function TopNews({
+  news,
+  status,
+  country,
+  SetTopNewsStatus,
+  AddTopNews,
+  SetSelectedArticleDetails,
+}) {
   useEffect(() => {
     SetTopNewsStatus(LoadingStatus.LOADING);
 
@@ -29,7 +34,6 @@ function TopNews(props) {
   }, [country]);
 
   const setArticleDetails = (article) => {
-    console.log(article);
     SetSelectedArticleDetails(article);
   };
 

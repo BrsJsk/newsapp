@@ -7,9 +7,7 @@ import { SetCountry, SetIsDisabledCountry } from '../redux/actions';
 import { Countries } from '../constants';
 import { device } from '../styles/breakpoints';
 
-function Header(props) {
-  const { country, isDisabled, SetCountry, SetIsDisabledCountry } = props;
-
+function Header({ country, isDisabled, SetCountry, SetIsDisabledCountry }) {
   const location = useLocation();
 
   useEffect(() => {
@@ -42,14 +40,14 @@ function Header(props) {
 
       <ButtonRow>
         <HeaderButton
-          onClick={() => setActiveCountry(Countries.GREAT_BRITAIN)}
+          onClick={() => (!isDisabled ? setActiveCountry(Countries.GREAT_BRITAIN) : null)}
           disabled={isDisabled}
           active={country === Countries.GREAT_BRITAIN}
         >
           GB
         </HeaderButton>
         <HeaderButton
-          onClick={() => setActiveCountry(Countries.USA)}
+          onClick={() => (!isDisabled ? setActiveCountry(Countries.USA) : null)}
           disabled={isDisabled}
           active={country === Countries.USA}
         >
