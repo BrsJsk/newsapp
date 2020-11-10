@@ -16,8 +16,7 @@ const categories = [
   'technology',
 ];
 
-function Categories(props) {
-  const { country } = props;
+function Categories({ country }) {
   return (
     <Wrapper>
       <MainHeading>

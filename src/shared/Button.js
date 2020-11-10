@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { device } from '../styles/breakpoints';
 
-function Button(props) {
-  const { placeholder, handleClick } = props;
+function Button({ placeholder, handleClick }) {
   return <Wrapper onClick={() => (handleClick ? handleClick() : null)}>{placeholder}</Wrapper>;
 }
 

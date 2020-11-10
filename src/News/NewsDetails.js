@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import NoData from '../shared/NoData';
 import Button from '../shared/Button';
 
-function NewsDetails(props) {
-  const { article } = props;
-
+function NewsDetails({ article }) {
   const goBack = () => {
     window.history.back();
   };

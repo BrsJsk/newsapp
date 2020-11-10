@@ -5,9 +5,7 @@ import Button from './Button';
 import { Link } from 'react-router-dom';
 import { device } from '../styles/breakpoints';
 
-export function NewsCard(props) {
-  const { news } = props;
-
+export function NewsCard({ news, setArticleDetails }) {
   if (!news) {
     return <NoDataText>No data</NoDataText>;
   }
@@ -18,7 +16,7 @@ export function NewsCard(props) {
 
       <CardThumbnail thumbnail={news.urlToImage} />
       <CardDescription title={news.description}>{news.description}</CardDescription>
-      <Link to="/details" onClick={() => props.setArticleDetails(news)}>
+      <Link to="/details" onClick={() => setArticleDetails(news)}>
         <Button placeholder="More" />
       </Link>
     </CardWrapper>

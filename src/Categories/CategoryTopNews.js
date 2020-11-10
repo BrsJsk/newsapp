@@ -10,11 +10,10 @@ import { SetSelectedArticleDetails } from '../redux/actions';
 import { Code } from 'react-content-loader';
 import { loadTopNewsForCategory } from '../services/data-service';
 
-function CategoryTopNews(props) {
+function CategoryTopNews({ country, SetSelectedArticleDetails }) {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState([]);
-  const { country, SetSelectedArticleDetails } = props;
 
   useEffect(() => {
     setIsLoading(true);
