@@ -14,7 +14,9 @@ create .env
 ## Environment
 
 REACT_APP_API_KEY - API key for fetching data. I will provide it in a email
+
 REACT_APP_API_URL - API url. I will provide it in a email
+
 REACT_APP_FAKE_DATA - Because API rate-limited to 100 requests, this is used as a flag to load mocked data during development
 
 ## Storybook
