@@ -4,6 +4,26 @@ import { NoDataText } from './Text';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 import { device } from '../styles/breakpoints';
+import * as PropTypes from 'prop-types';
+
+export function NewsCardInformations(props) {
+  return (
+    <>
+      <CardHeading role="heading">{props.title}</CardHeading>
+
+      <CardThumbnail thumbnail={props.thumbnail} />
+      <CardDescription role="main" title={props.title1}>
+        {props.title1}
+      </CardDescription>
+    </>
+  );
+}
+
+NewsCardInformations.propTypes = {
+  title: PropTypes.any,
+  thumbnail: PropTypes.any,
+  title1: PropTypes.any,
+};
 
 export function NewsCard({ news, setArticleDetails }) {
   if (!news) {
@@ -12,10 +32,11 @@ export function NewsCard({ news, setArticleDetails }) {
 
   return (
     <CardWrapper>
-      <CardHeading>{news.title}</CardHeading>
-
-      <CardThumbnail thumbnail={news.urlToImage} />
-      <CardDescription title={news.description}>{news.description}</CardDescription>
+      <NewsCardInformations
+        title={news.title}
+        thumbnail={news.urlToImage}
+        title1={news.description}
+      />
       <Link to="/details" onClick={() => setArticleDetails(news)}>
         <Button placeholder="More" />
       </Link>
