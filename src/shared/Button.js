@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { device } from '../styles/breakpoints';
+import {useSpring, animated} from 'react-spring'
 
 function Button({ placeholder, handleClick }) {
-  return <Wrapper onClick={() => (handleClick ? handleClick() : null)}>{placeholder}</Wrapper>;
+		const props = useSpring({
+				to: {opacity: 1, backgroud: '#f1eded'},
+				from: {opacity: 0.6, backgroud: '#fff'}
+		})
+		return <animated.div style={props}><Wrapper onClick={() => (handleClick ? handleClick() : null)}>{placeholder}</Wrapper></animated.div>;
 }
 
 const Wrapper = styled.button`
-  background: #f1eded;
   border: 1px solid #b7b3b3;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
